@@ -1,12 +1,6 @@
----
-title: 'Reproducible Research: Peer Assessment 1'
-author: "S. Blackstone"
-date: "17-05-2015"
-output:
-  html_document:
-    keep_md: yes
-  pdf_document: default
----
+# Reproducible Research: Peer Assessment 1
+S. Blackstone  
+17-05-2015  
 
 
 ## Loading and preprocessing the data
@@ -52,7 +46,7 @@ ggplot(totals,aes(x=steps)) +
   scale_y_continuous(breaks=seq(0,10,2))
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![](figures/HISTTOTAL-1.png) 
 
 As can be seen from the plot, the average number of steps per day will turn out to be around 10000 - slightly above. Or, to be more exact, the mean and median values are given in the table below.
 
@@ -109,7 +103,7 @@ ggplot(ints,aes(x=time,y=steps,group=1))+
   labs(title="Average Daily Activity",y="# steps")
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png) 
+![](figures/ACTIVITYPATTERN-1.png) 
 
 ## Imputing missing values
 Not all rows in the dataset have all values populated. This section investigates these rows with NA values and how they impact the previously obtained results.
@@ -198,7 +192,7 @@ ggplot(totals2,aes(x=steps)) +
   scale_y_continuous(breaks=seq(0,10,2))
 ```
 
-![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
+![](figures/HISTTOTAL2-1.png) 
 
 It turns out that the histogram of the total number of steps with the missing values filled in is almost exactly the same. The only difference is one spike near the 1000 steps area: the bin containing the counts for the 1000-1500 range now has count 8, where on the previous plot there were none.
 
@@ -276,5 +270,5 @@ ggplot(means2df,aes(x=time,y=steps))+
   labs(title="Average Daily Activity, weekdays vs weekends",y="# steps",x="time")
 ```
 
-![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png) 
+![](figures/PANELPLOT-1.png) 
 

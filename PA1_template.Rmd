@@ -7,7 +7,10 @@ output:
     keep_md: yes
   pdf_document: default
 ---
-
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.path='figures/',
+                      echo=TRUE, warning=FALSE, message=FALSE)
+```
 
 ## Loading and preprocessing the data
 The data have been taken from the course website in .zip format. If not already done using an appropriate stand-alone utility, the archive can be extracted with the call 
@@ -41,7 +44,7 @@ totals <- aggregate(steps ~ date,data=activity, sum,na.rm=TRUE)
 
 The following figure plots a histogram of the total number of steps: x-axis contains the number of steps, y-axis the number of occurrences of that number. The resolution is set to an interval size of 500 steps per bin.
 
-````{r message=FALSE}
+````{r message=FALSE, label=HISTTOTAL}
 require('ggplot2')
 ggplot(totals,aes(x=steps)) +
   geom_histogram(fill="white",colour="black",binwidth=500) +
@@ -80,7 +83,7 @@ Highest mean activity (`r round(highestactivity,0)` steps on average) is measure
 `r strftime(highestactivityinterval,"%H:%M")` and `r strftime(highestactivityinterval+5*60,"%H:%M")`.
 
 Below a time series plot is drawn showing an overview of the average daily activity:
-```{r}
+```{r label=ACTIVITYPATTERN}
 #Use the scales package to calculate somewhat nicer and readable labels for the x-axis
 library(scales)
 
@@ -123,7 +126,7 @@ Option 1 does not give any extra information, and option 2 is not feasible, leav
 
 The following chunk of R code creates a dataframe `actvity2` with the missing values for the steps column in the original data replaced by the median of the number of steps for the specific interval.
 
-```{r label="NAMEDCHUNK1"}
+```{r}
 #Calculate the medians for the different time intervals
 medians           <- aggregate(steps ~ interval,data=activity, median,na.rm=TRUE)
 # join them to the activity data frame
@@ -145,7 +148,7 @@ totals2 <- aggregate(steps ~ date,data=activity2, sum)
 
 And the histogram plot:
 
-````{r}
+````{r label=HISTTOTAL2}
 ggplot(totals2,aes(x=steps)) +
   geom_histogram(fill="white",colour="black",binwidth=500) +
   labs(title="Total number of steps per day\nmedian substitued for missing values",xlab="# steps/day",ylab="Count")+
@@ -197,7 +200,7 @@ means2df <- data.frame(interval=means2$interval,
 
 Below is a plot showing the average daily activity, split between weekdays and weekend days:
 
-```{r}
+```{r label=PANELPLOT}
 # Create the line plot, use the daytype as facet
 ggplot(means2df,aes(x=time,y=steps))+
   facet_grid(daytype ~ .) +
